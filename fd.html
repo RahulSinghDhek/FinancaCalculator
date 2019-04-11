@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+              <title>Bootstrap Example</title>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+              <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+              <script>
+                function calculateFD()
+                {
+
+                    p = document.getElementById("fdAmount").value;
+                    t = document.getElementById("fduration").value;
+                    r = document.getElementById("finterestRate").value;
+                    c = document.getElementById("fcompounding").value;
+                    monYear = document.getElementById("monYear").value;
+                    var n=1;
+                    if(c == "Quaterly"){
+                        n=4;
+                    }
+                    if(c == "Monthly"){
+                        n=12;
+                    }
+                    if (c=="Half Yearly"){
+                        n=2;
+                    }
+                    interest = (1+ (r/(100*n)));
+
+                    if(monYear == "Years"){
+
+                        maturedAmt =  p *( Math.pow(interest,(n*t)));
+                    }
+                    if(monYear == "Months"){
+                        maturedAmt =  p*( Math.pow(interest,(n*t/12)));
+                    }
+                    if(monYear== "Days"){
+                         maturedAmt =  p*( Math.pow(interest,(n*t/365)));
+                    }
+                        document.getElementById("fmaturityAmount").value= Math.round(maturedAmt);
+                }
+              </script>
+        </head>
+        <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                        <h2>Fixed Deposit Calculator</h2>
+                        <form class="form-horizontal" >
+                            <div class="form-group">
+                                    <label class="control-label col-sm-4" for="fdAmount">FD Amount</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="fdAmount" placeholder="deposit in Rupees">
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <label class="control-label col-sm-4" for="fduration">Duration</label>
+                                    <div class="col-sm-5">
+                                        <input type="number" class="form-control" id="fduration" placeholder="Duration">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <select class="form-control" id="monYear">
+                                            <option>Years</option>
+                                            <option>Months</option>
+                                            <option>Days</option>
+                                        </select>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <label class="control-label col-sm-4" for="finterestRate">Interest Rate</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="finterestRate" placeholder="e.g. 7.5">
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <label class="control-label col-sm-4" for="fcompounding">Coumpounding</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="fcompounding">
+                                                <option>Monthly</option>
+                                                <option>Quaterly</option>
+                                                <option>Half Yearly</option>
+                                                <option>Annually</option>
+                                        </select>
+                                        </div>                  
+                             </div>
+                            
+                            <div class="form-group"> 
+                                <button type="submit" class="btn btn-default col-sm-4" onclick="calculateFD(); return false;">Maturity Amount</button>
+                                <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="fmaturityAmount" placeholder="">
+                                </div>
+                            </div>
+                        </form>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>    
+           
+        </div>
+        </body>
+</html>
